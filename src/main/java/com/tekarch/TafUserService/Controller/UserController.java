@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user-management")
-
+@CrossOrigin(origins = "*")
 public class UserController {
     private final UserServiceImpl userserviceImpl;
     private static final Logger logger = LogManager.getLogger(UserController.class);
@@ -21,7 +21,9 @@ public class UserController {
         this.userserviceImpl = userserviceImpl;
     }
 
+
     @PostMapping("/register")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<UserDTO> registerUser(@RequestBody UserDTO userDTO) {
         logger.info("Requesting to create a new user {}",userDTO.getUsername());
         return ResponseEntity.ok(userserviceImpl.registerUser(userDTO));
@@ -52,7 +54,4 @@ public class UserController {
         List<UserDTO> users = userserviceImpl.getAllUsers();
         return ResponseEntity.ok(users);
     }
-
-
-
 }
